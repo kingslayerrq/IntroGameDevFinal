@@ -18,3 +18,12 @@ isFalling = false;
 isFacingRight = true;
 isJumping = true;
 isKnockedOut = false;
+isDescending = false;
+
+dashTimer = 0;
+dashDir = 0;
+dashThreshold = 350;
+lastLkey = 0;
+lastRkey = 0;
+lastDescKey = 0;
+descThreshold = 300;

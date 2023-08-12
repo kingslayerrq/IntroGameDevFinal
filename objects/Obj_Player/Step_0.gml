@@ -49,7 +49,13 @@ x_vel *= 0.9;
 //add gravity to the y velocity
 y_vel += grav;
 
-
+if(isKnockedOut){
+	var ind = ds_list_find_index(Obj_GameManager.targetList, id);
+	ds_list_delete(Obj_GameManager.targetList, ind);
+}
+else if(!isKnockedOut and ds_list_find_index(Obj_GameManager.targetList, id) == -1){
+	ds_list_add(Obj_GameManager.targetList, id);
+}
 
 //if respawn_timer is greater than 0
 //AKA if respawn_timer is counting down
@@ -71,6 +77,7 @@ if (isKnockedOut){
 			r_x = 0;
 			r_y = 0;
 			isKnockedOut = false;
+			isDescending = false;
 			image_yscale = 1;
 			
 		}
@@ -131,23 +138,25 @@ if(!isKnockedOut){
 				//if we aren't already overlapping with that instance
 				//if(place_meeting(x, y , collide_with) == false)
 				//{
-
-					if(collide_with.isKnockedOut != true)
-					{
-						show_debug_message("player");	
-						colliding = true;
-						collide_with.y_vel = max(0, collide_with.y_vel + 2);
-						collide_with.image_yscale = -1;
-						collide_with.isKnockedOut = true;
-						with(Obj_Cloud){
-							if (image_blend == collide_with.myColor){
-								destroyCloud(self);
+					if(isDescending){
+						if(collide_with.isKnockedOut != true and !collide_with.isDescending)
+						{
+							show_debug_message("player");
+							isDescending = false;
+							colliding = true;
+							collide_with.y_vel = max(0, collide_with.y_vel + 2);
+							collide_with.image_yscale = -1;
+							collide_with.isKnockedOut = true;
+							with(Obj_Cloud){
+								if (image_blend == collide_with.myColor){
+									destroyCloud(self);
+								}
 							}
+							if(!audio_is_playing(snd_die)){
+								audio_play_sound(snd_die, 6, false);
+							}
+							setStarEmitter(x, y + dir);
 						}
-						if(!audio_is_playing(snd_hit)){
-							audio_play_sound(snd_hit, 4, false);
-						}
-						setStarEmitter(x, y + dir);
 					}
 				//}
 			}
@@ -162,10 +171,10 @@ if(!isKnockedOut){
 					//instance_destroy(collide_with);
 						
 					//if we aren't already overlapping with that instance
-					if(place_meeting(x, y + 20, collide_with) == false)
-					{
-						colliding = true;
-					}
+					//if(place_meeting(x, y + 20, collide_with) == false)
+					//{
+					//	colliding = true;
+					//}
 					colliding = true;
 				}
 			}
@@ -179,15 +188,17 @@ if(!isKnockedOut){
 			to_move_y -= dir;
 		} 
 		else{
-
-			if(!audio_is_playing(snd_bounce)){
-				audio_play_sound(snd_bounce, 3, false);
-			}
-			y = y + dir;
-			y_vel = -10;
-			r_y = 0;
 			
-			break;
+				if(!audio_is_playing(snd_bounce)){
+					audio_play_sound(snd_bounce, 3, false);
+				}
+				isDescending = false;
+				y = y + dir;
+				y_vel = max(min(-10, -y_vel), -15);
+				r_y = 0;
+			
+				break;
+			
 		}
 	}
 	//sprite update
@@ -224,15 +235,62 @@ if(y > room_height + 50 && respawn_timer == 0){
 
 
 //add acceleration to x speed based on input
-if (!isKnockedOut){
+if (!isKnockedOut and !isDescending){
 	if(keyboard_check(ord(left_key))){
+		
 		x_vel -= accel;
 		isFacingRight = false;
+		
+		
 	}
 	if(keyboard_check(ord(right_key))){
+		
 		x_vel += accel;
 		isFacingRight = true;
+		
 	}
+	
+	if(keyboard_check_released(dashL)){
+		var timeSinceLastKey = current_time - lastLkey;
+		//show_debug_message(timeSinceLastKey);
+		if (timeSinceLastKey <= dashThreshold){
+			dashDir = -1;
+			dash(id, dashDir);
+			show_debug_message("double dash");
+		}
+		else{
+			show_debug_message("normal dash");
+		}
+		lastLkey = current_time;
+	}
+
+	if(keyboard_check_released(dashR)){
+		var timeSinceLastKey = current_time - lastRkey;
+		//show_debug_message(timeSinceLastKey);
+		if (timeSinceLastKey <= dashThreshold){
+			dashDir = 1;
+			dash(id, dashDir);
+			show_debug_message("double dash");
+		}
+		else{
+			show_debug_message("normal dash");
+		}
+		lastRkey = current_time;
+	}
+	if(keyboard_check_released(descendKey)){
+		var timeSinceLastKey = current_time - lastDescKey;
+		show_debug_message(timeSinceLastKey);
+		if (timeSinceLastKey <= descThreshold){
+			
+			descend(id);
+			show_debug_message("double dash");
+		}
+		else{
+			
+		}
+		lastDescKey = current_time;
+	}
+	
 }
 
 

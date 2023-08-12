@@ -3,6 +3,7 @@
 p1ScoreRecorder = 0;
 p2ScoreRecorder = 0;
 
+draw_set_font(Font1);
 
 
 

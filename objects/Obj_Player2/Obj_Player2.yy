@@ -37,6 +37,9 @@
     {"resourceType":"GMOverriddenProperty","resourceVersion":"1.0","name":"","propertyId":{"name":"Spr_Jumping","path":"objects/Obj_Player/Obj_Player.yy",},"objectId":{"name":"Obj_Player","path":"objects/Obj_Player/Obj_Player.yy",},"value":"Spr_Player2_Jumping0",},
     {"resourceType":"GMOverriddenProperty","resourceVersion":"1.0","name":"","propertyId":{"name":"Spr_Falling","path":"objects/Obj_Player/Obj_Player.yy",},"objectId":{"name":"Obj_Player","path":"objects/Obj_Player/Obj_Player.yy",},"value":"Spr_Player2_Falling",},
     {"resourceType":"GMOverriddenProperty","resourceVersion":"1.0","name":"","propertyId":{"name":"myColor","path":"objects/Obj_Player/Obj_Player.yy",},"objectId":{"name":"Obj_Player","path":"objects/Obj_Player/Obj_Player.yy",},"value":"$FF2655D6",},
+    {"resourceType":"GMOverriddenProperty","resourceVersion":"1.0","name":"","propertyId":{"name":"dashL","path":"objects/Obj_Player/Obj_Player.yy",},"objectId":{"name":"Obj_Player","path":"objects/Obj_Player/Obj_Player.yy",},"value":"vk_left",},
+    {"resourceType":"GMOverriddenProperty","resourceVersion":"1.0","name":"","propertyId":{"name":"dashR","path":"objects/Obj_Player/Obj_Player.yy",},"objectId":{"name":"Obj_Player","path":"objects/Obj_Player/Obj_Player.yy",},"value":"vk_right",},
+    {"resourceType":"GMOverriddenProperty","resourceVersion":"1.0","name":"","propertyId":{"name":"descendKey","path":"objects/Obj_Player/Obj_Player.yy",},"objectId":{"name":"Obj_Player","path":"objects/Obj_Player/Obj_Player.yy",},"value":"vk_down",},
   ],
   "parent": {
     "name": "Objects",

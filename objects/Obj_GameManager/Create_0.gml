@@ -1,7 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
 frames_since_lastcloud = 0;
-frames_between_cloud = 100;
+frames_between_cloud = 150;
 
 
 maxCloudCount = 40;
