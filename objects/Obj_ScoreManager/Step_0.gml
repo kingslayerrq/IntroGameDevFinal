@@ -32,3 +32,4 @@ if( p1!= noone and p2 != noone){
 
 p1Score = p1ScoreCurFrame;
 p2Score = p2ScoreCurFrame;
+

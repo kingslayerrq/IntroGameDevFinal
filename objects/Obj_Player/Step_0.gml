@@ -221,9 +221,13 @@ else
 
 //if we reached the bottom of the room and the respawn timer is 0
 if(y > room_height + 50 && respawn_timer == 0){
-
+	var KOPlayerColor = myColor;
 	isKnockedOut = true;
-	
+	with(Obj_Cloud){
+		if (image_blend == KOPlayerColor){
+			destroyCloud(self);
+		}
+	}
 	
 	if(!audio_is_playing(snd_ground)){
 		audio_play_sound(snd_ground, 3, false);
@@ -258,11 +262,14 @@ if (!isKnockedOut and !isDescending){
 		if (timeSinceLastKey <= dashThreshold){
 			dashDir = -1;
 			dash(id, dashDir);
+			part_particles_create(global.PSystem, x, y, dashFadePT, 1);
+
 			//show_debug_message("double dash");
 		}
 		else{
 			//show_debug_message("normal dash");
 		}
+		
 		lastLkey = current_time;
 	}
 
@@ -270,13 +277,18 @@ if (!isKnockedOut and !isDescending){
 		var timeSinceLastKey = current_time - lastRkey;
 		//show_debug_message(timeSinceLastKey);
 		if (timeSinceLastKey <= dashThreshold){
+			
 			dashDir = 1;
 			dash(id, dashDir);
+
+			part_particles_create(global.PSystem, x, y, dashFadePT, 1);
+
 			//show_debug_message("double dash");
 		}
 		else{
 			//show_debug_message("normal dash");
 		}
+		
 		lastRkey = current_time;
 	}
 	if(keyboard_check_released(descendKey)){

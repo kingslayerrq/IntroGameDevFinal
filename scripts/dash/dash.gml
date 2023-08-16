@@ -2,6 +2,9 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function dash(player, dir){
 	show_debug_message("dashing");
+	//player.dashFadeTimer--;
+	
+	
 	if(!audio_is_playing(snd_dash)){
 		audio_play_sound(snd_dash, 5, false);
 	}

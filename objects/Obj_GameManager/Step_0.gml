@@ -8,7 +8,7 @@ frames_since_lastcloud ++;
 
 
 if (Obj_RoundManager.gameStart){
-	if((frames_since_lastcloud >= frames_between_cloud or cloudCount < 8) and cloudCount < maxCloudCount){
+	if((frames_since_lastcloud >= frames_between_cloud or cloudCount < 20) and cloudCount < maxCloudCount){
 		spawnCloud();
 	}
 }

@@ -3,8 +3,9 @@
 frames_since_lastcloud = 0;
 frames_between_cloud = 150;
 
+randomize();
 
-maxCloudCount = 40;
+maxCloudCount = 50;
 
 cam = view_camera[0];
 transitionSpeed = 0.2;

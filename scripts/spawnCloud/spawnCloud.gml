@@ -7,16 +7,17 @@ function spawnCloud(){
 	//var view_width = camera_get_view_width(view_camera[0]);
 	//var view_height = camera_get_view_height(view_camera[0]);
 	var randomX = random_range(0, room_width);
-	var randomY = random_range(220, room_height - 220);
+	var randomY = random_range(220, room_height - 64);
 	
 	var newCloud = instance_create_layer(randomX, randomY, "Instances", Obj_Cloud);
 	with(newCloud){
 		var tries = 0;
-		while(tries< 3000 and  collision_rectangle(randomX - 160, randomY - 160, randomX + 160, randomY + 160, Obj_Solid, false, false) != noone){
+		while(tries< 3000 and  collision_rectangle(randomX - 200, randomY - 70, randomX + 200, randomY + 70, Obj_Solid, false, true) != noone){
 			x = random_range(0, room_width);
-			y = random_range(220, room_height - 220);
+			y = random_range(220, room_height - 64);
 			tries++;
 		}
+		
 		
 	}
 	Obj_GameManager.frames_since_lastcloud = 0;

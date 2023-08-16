@@ -7,10 +7,14 @@ var p2 = instance_find(Obj_Player2, 0);
 if (global.gameOngoing >= global.gameDuration){
 	gameStart = false;
 	
+	
 	showEnding = true;
 	
 	instance_destroy(p1);
 	instance_destroy(p2);
+	with(Obj_Cloud){
+		destroyCloud(self);
+	}
 	if (keyboard_check(vk_space)){
 		room_restart();
 	}

@@ -3,9 +3,11 @@
 global.initTime = 60;
 global.initOngoing = 0;
 
+victoryColorP1 = make_color_rgb(86, 187, 0);
 
+victoryColorP2 = make_color_rgb(214, 85, 38);
 
-global.gameDuration = 6000;
+global.gameDuration = 1800;
 global.gameOngoing = 0;
 playerSpawned = false;
 

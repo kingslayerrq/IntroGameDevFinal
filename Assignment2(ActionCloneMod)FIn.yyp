@@ -4,6 +4,7 @@
   "name": "Assignment2(ActionCloneMod)FIn",
   "resources": [
     {"id":{"name":"Obj_Player1","path":"objects/Obj_Player1/Obj_Player1.yy",},"order":1,},
+    {"id":{"name":"Spr_Trail_Red","path":"sprites/Spr_Trail_Red/Spr_Trail_Red.yy",},"order":21,},
     {"id":{"name":"getCenter","path":"scripts/getCenter/getCenter.yy",},"order":9,},
     {"id":{"name":"snd_bgm","path":"sounds/snd_bgm/snd_bgm.yy",},"order":6,},
     {"id":{"name":"Obj_Player","path":"objects/Obj_Player/Obj_Player.yy",},"order":0,},
@@ -20,6 +21,7 @@
     {"id":{"name":"snd_hit","path":"sounds/snd_hit/snd_hit.yy",},"order":1,},
     {"id":{"name":"Obj_Player2","path":"objects/Obj_Player2/Obj_Player2.yy",},"order":2,},
     {"id":{"name":"setStarEmitter","path":"scripts/setStarEmitter/setStarEmitter.yy",},"order":6,},
+    {"id":{"name":"Spr_Trail_Green","path":"sprites/Spr_Trail_Green/Spr_Trail_Green.yy",},"order":22,},
     {"id":{"name":"Font1","path":"fonts/Font1/Font1.yy",},"order":0,},
     {"id":{"name":"Obj_GameManager","path":"objects/Obj_GameManager/Obj_GameManager.yy",},"order":7,},
     {"id":{"name":"Spr_Player2_Jumping1","path":"sprites/Spr_Player2_Jumping1/Spr_Player2_Jumping1.yy",},"order":2,},
