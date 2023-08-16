@@ -26,11 +26,11 @@ dashCDTimer = 0;
 dashDur = 8;
 dashAccelMultiplier = 1.8;
 dashDir = 0;
-dashThreshold = 350;
+dashThreshold = 290;
 lastLkey = 0;
 lastRkey = 0;
 lastDescKey = 0;
-descThreshold = 300;
+descThreshold = 280;
 
 
 descendFXTimer = 0;

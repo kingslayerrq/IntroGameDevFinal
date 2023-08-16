@@ -139,7 +139,7 @@ if(!isKnockedOut){
 				if(place_meeting(x, y , collide_with) == false)
 				{
 					if(isDescending){
-						if(collide_with.isKnockedOut != true and !collide_with.isDescending)
+						if(collide_with.isKnockedOut != true and !collide_with.isDescending )
 						{
 							screenshake(25, 5, 0.3);
 							y_vel = max(min(-10, -y_vel), -15);
@@ -174,10 +174,10 @@ if(!isKnockedOut){
 					//instance_destroy(collide_with);
 						
 					//if we aren't already overlapping with that instance
-					//if(place_meeting(x, y + 20, collide_with) == false)
-					//{
-					//	colliding = true;
-					//}
+					if(place_meeting(x, y + 20, collide_with) == false)
+					{
+						colliding = true;
+					}
 					colliding = true;
 				}
 			}
