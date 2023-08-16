@@ -141,6 +141,7 @@ if(!isKnockedOut){
 					if(isDescending){
 						if(collide_with.isKnockedOut != true and !collide_with.isDescending)
 						{
+							screenshake(25, 5, 0.3);
 							y_vel = max(min(-10, -y_vel), -15);
 							r_y = 0;
 							show_debug_message("player");
@@ -190,7 +191,9 @@ if(!isKnockedOut){
 			to_move_y -= dir;
 		} 
 		else{
-			
+			//if(isDescending){
+			//	screenshake(10, 1, 0.4);
+			//}
 				if(!audio_is_playing(snd_bounce)){
 					audio_play_sound(snd_bounce, 3, false);
 				}
@@ -198,7 +201,6 @@ if(!isKnockedOut){
 				y = y + dir;
 				y_vel = max(min(-10, -y_vel), -15);
 				r_y = 0;
-			
 				break;
 			
 		}
