@@ -17,10 +17,15 @@ repeat(partAmount){
 	
 	part_type_orientation(trailPT, direction, direction, false, false, false);
 	
-	
-	if(random(10) > 2) part_particles_create(global.PSystem, xDiffL, yDiffL, trailPT, 1);
-	part_particles_create(global.PSystem, xDiffM, yDiffM, trailPT, 1);
-	if(random(10) > 2) part_particles_create(global.PSystem, xDiffR, yDiffR, trailPT, 1);
+	if (!isDescending){
+		if(random(10) > 2) part_particles_create(global.PSystem, xDiffL, yDiffL, trailPT, 1);
+		part_particles_create(global.PSystem, xDiffM, yDiffM, trailPT, 1);
+		if(random(10) > 2) part_particles_create(global.PSystem, xDiffR, yDiffR, trailPT, 1);
+	}
+	else{
+		part_particles_create(global.PSystem, xDiffL - irandom_range(10, 30), yDiffL, trailPT, 1);
+		part_particles_create(global.PSystem, xDiffR + irandom_range(10, 30), yDiffR, trailPT, 1);
+	}
 }
 
 var randTrigTime = irandom_range(1, 4);

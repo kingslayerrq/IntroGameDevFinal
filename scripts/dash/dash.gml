@@ -10,5 +10,5 @@ function dash(player, dir){
 	}
 	var origX = player.x;
 	var targetX = origX + dir * 80;
-	player.x = lerp(player.x, targetX, 0.5);
+	player.x = lerp(player.x, targetX, 1);
 }

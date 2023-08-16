@@ -19,8 +19,12 @@ isFacingRight = true;
 isJumping = true;
 isKnockedOut = false;
 isDescending = false;
+isDashing = false;
 
-dashTimer = 0;
+dashCD = 45;
+dashCDTimer = 0;
+dashDur = 8;
+dashAccelMultiplier = 1.8;
 dashDir = 0;
 dashThreshold = 350;
 lastLkey = 0;
@@ -29,6 +33,7 @@ lastDescKey = 0;
 descThreshold = 300;
 
 
+descendFXTimer = 0;
 dashFadePT = part_type_create();
 
 part_type_sprite(dashFadePT, sprite_index, false, false, false);

@@ -69,8 +69,8 @@ if (p1 != noone and p2 != noone){
 			lerp(camera_get_view_height(cam), aspWHeight, transitionSpeed));
 		camera_set_view_pos(cam, lerp(camera_get_view_x(cam), targetXPos, transitionSpeed), 
 			lerp(camera_get_view_y(cam), targetYPos , transitionSpeed));
-	show_debug_message(camera_get_view_x(cam));
-	show_debug_message(camera_get_view_y(cam));
+	//show_debug_message(camera_get_view_x(cam));
+	//show_debug_message(camera_get_view_y(cam));
 	}
 	//use height as base
 	else{

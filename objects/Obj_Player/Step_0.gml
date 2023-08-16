@@ -136,8 +136,8 @@ if(!isKnockedOut){
 			if(collide_with != noone)
 			{
 				//if we aren't already overlapping with that instance
-				//if(place_meeting(x, y , collide_with) == false)
-				//{
+				if(place_meeting(x, y , collide_with) == false)
+				{
 					if(isDescending){
 						if(collide_with.isKnockedOut != true and !collide_with.isDescending)
 						{
@@ -155,13 +155,13 @@ if(!isKnockedOut){
 									destroyCloud(self);
 								}
 							}
-							if(!audio_is_playing(snd_die)){
-								audio_play_sound(snd_die, 6, false);
+							if(!audio_is_playing(snd_die_new)){
+								audio_play_sound(snd_die_new, 6, false);
 							}
 							setStarEmitter(x, y + dir);
 						}
 					}
-				//}
+				}
 			}
 			else {
 
@@ -261,14 +261,16 @@ if (!isKnockedOut and !isDescending){
 	if(keyboard_check_released(dashL)){
 		var timeSinceLastKey = current_time - lastLkey;
 		//show_debug_message(timeSinceLastKey);
-		if (timeSinceLastKey <= dashThreshold){
+		if (timeSinceLastKey <= dashThreshold and dashCDTimer == dashCD){
+			isDashing = true;
 			dashDir = -1;
-			dash(id, dashDir);
-			part_particles_create(global.PSystem, x, y, dashFadePT, 1);
-
+			//dash(id, dashDir);
+			//part_particles_create(global.PSystem, x, y, dashFadePT, 1);
+			dashCDTimer = 0;
 			//show_debug_message("double dash");
 		}
 		else{
+			//isDashing = false;
 			//show_debug_message("normal dash");
 		}
 		
@@ -278,18 +280,20 @@ if (!isKnockedOut and !isDescending){
 	if(keyboard_check_released(dashR)){
 		var timeSinceLastKey = current_time - lastRkey;
 		//show_debug_message(timeSinceLastKey);
-		if (timeSinceLastKey <= dashThreshold){
-			
+		if (timeSinceLastKey <= dashThreshold and dashCDTimer == dashCD){
+			isDashing = true;
 			dashDir = 1;
-			dash(id, dashDir);
-
-			part_particles_create(global.PSystem, x, y, dashFadePT, 1);
-
+			//dash(id, dashDir);
+			
+			//part_particles_create(global.PSystem, x, y, dashFadePT, 1);
+			dashCDTimer = 0;
 			//show_debug_message("double dash");
 		}
 		else{
+			//isDashing = false;
 			//show_debug_message("normal dash");
 		}
+		
 		
 		lastRkey = current_time;
 	}
@@ -304,17 +308,51 @@ if (!isKnockedOut and !isDescending){
 		else{
 			
 		}
+		
 		lastDescKey = current_time;
 	}
 	
 }
+if(dashCDTimer < dashCD){
+	dashCDTimer ++;
+}
 
+if(isDashing){
+	part_particles_create(global.PSystem, x, y, dashFadePT, 1);
+}
 
 if(isFacingRight){
 	image_xscale = 1;
 }
 else{
 	image_xscale = -1;
+}
+
+if(isDescending){
+	//if(descendFXTimer % 1==0){
+		part_particles_create(global.PSystem, x, y, dashFadePT, 1);
+	//}
+	//descendFXTimer++;
+}
+//else{
+//	descendFXTimer = 0;
+//}
+
+if(isDashing ){
+	if(dashDur>=0){
+		y_vel = 0;
+		dashDur --;
+		if(!audio_is_playing(snd_dash)){
+			audio_play_sound(snd_dash, 5, false);
+		}
+		x_vel += dashDir * accel * dashAccelMultiplier;
+		show_debug_message(dashDur);
+	}
+	else{
+		dashDur = 8;
+		isDashing = false;
+	}
+		
 }
 
 

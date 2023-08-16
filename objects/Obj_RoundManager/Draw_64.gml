@@ -38,5 +38,5 @@ remainTimeX = display_get_gui_width()/2;
 remainTimeY = 50;
 remainTime = round((global.gameDuration - global.gameOngoing)/room_speed);
 draw_set_halign(fa_middle);
-draw_text_transformed_color(remainTimeX, remainTimeY, remainTime, 5, 5, image_angle, c_black, c_black, c_white, c_white,1);
+draw_text_transformed_color(remainTimeX, remainTimeY, remainTime, 5, 5, image_angle, c_gray, c_gray, c_white, c_white,1);
 
