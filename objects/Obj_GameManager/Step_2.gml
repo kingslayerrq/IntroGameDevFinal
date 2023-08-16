@@ -2,35 +2,86 @@
 // You can write your code in this editor
 var p1 = instance_find(Obj_Player1, 0);
 var p2 = instance_find(Obj_Player2, 0);
-targetList = ds_list_create();
-targetList[|0] = p1;
-targetList[|1] = p2;
-camOffsetX = 10;
-camOffsetY = 10;
-
-minCamWidth = 768;
-minCamHeight = 512;
+//targetList = ds_list_create();
+//targetList[|0] = p1;
+//targetList[|1] = p2;
 
 
-var camera_h = 512;
-var transitionSpeed = 0.1;
-var halfViewHeight = camera_get_view_height(view_camera[0])/2;
-if (p1 != noone and p2 != noone){
+
+//var camera_h = 512;
+
+//var halfViewHeight = camera_get_view_height(view_camera[0])/2;
+//if (p1 != noone and p2 != noone){
 	
-	if (p1.y < room_height  and p2.y < room_height){
-		camera_h = (p1.y + p2.y)/2;
+//	if (p1.y < room_height  and p2.y < room_height){
+//		camera_h = (p1.y + p2.y)/2;
+//	}
+//	else if (p1.y < room_height and p2.y >= room_height){
+//		camera_h = p1.y;
+//	}
+//	else if (p1.y >= room_height and p2.y < room_height){
+//		camera_h = p2.y;
+//	}
+//}
+//else{
+//	camera_h = 512;
+//}
+//camera_set_view_pos(view_camera[0], 0, lerp(camera_get_view_y(view_camera[0]), min(camera_h - halfViewHeight, 512) , transitionSpeed));
+
+if (p1 != noone and p2 != noone){
+	if(p1.y <= room_height and p2.y <= room_height){
+		//with offset
+		var leftBound = min(p1.bbox_left, p2.bbox_left) - offsetWidth;
+		var rightBound = max(p1.bbox_right, p2.bbox_right) + offsetWidth;
+		var topBound = min(p1.bbox_top, p2.bbox_top) - offsetHeight;
+		var botBound = max(p1.bbox_bottom, p2.bbox_bottom) + offsetHeight;
 	}
-	else if (p1.y < room_height and p2.y >= room_height){
-		camera_h = p1.y;
+	else if(p1.y <= room_height and p2.y > room_height){
+		var leftBound = p1.x - 384;
+		var rightBound = p1.x + 384;
+		var topBound = p1.y - 256;
+		var botBound = p1.y + 256
 	}
-	else if (p1.y >= room_height and p2.y < room_height){
-		camera_h = p2.y;
+	else if(p2.y <= room_height and p1.y > room_height){
+		var leftBound = p2.x - 384;
+		var rightBound = p2.x + 384;
+		var topBound = p2.y - 256;
+		var botBound = p2.y + 256;
+	}
+	else{
+		var leftBound = 0;
+		var rightBound = room_width;
+		var topBound = 0;
+		var botBound = room_height;
+	}
+	//basic width&&height
+	var widthDist = min(rightBound - leftBound, room_width);
+	var heightDist = min(botBound - topBound, room_height);
+
+	var aspWHeight = widthDist * (1/aspectRatio);   //width as base
+	var aspHWidth = heightDist * aspectRatio;       //height as base
+
+	//width as base
+	if(aspWHeight >= heightDist){
+		var targetXPos =  clamp((leftBound + rightBound) * 0.5 - widthDist * 0.5, 0, room_width -  widthDist);
+		var targetYPos = clamp((topBound + botBound) * 0.5 - aspWHeight * 0.5, 0, room_height - aspWHeight);
+		camera_set_view_size(cam, lerp(camera_get_view_width(cam), widthDist, transitionSpeed), 
+			lerp(camera_get_view_height(cam), aspWHeight, transitionSpeed));
+		camera_set_view_pos(cam, lerp(camera_get_view_x(cam), targetXPos, transitionSpeed), 
+			lerp(camera_get_view_y(cam), targetYPos , transitionSpeed));
+	show_debug_message(camera_get_view_x(cam));
+	show_debug_message(camera_get_view_y(cam));
+	}
+	//use height as base
+	else{
+		var targetXPos = clamp((leftBound + rightBound) * 0.5 -aspHWidth * 0.5, 0, room_width - aspHWidth );
+		var targetYPos = clamp((topBound + botBound) * 0.5 - heightDist * 0.5, 0, room_height - heightDist);
+		camera_set_view_size(cam, lerp(camera_get_view_width(cam), aspHWidth, transitionSpeed), 
+			lerp(camera_get_view_height(cam), heightDist, transitionSpeed));
+		camera_set_view_pos(cam, lerp(camera_get_view_x(cam), targetXPos, transitionSpeed), 
+			lerp(camera_get_view_y(cam), targetYPos, transitionSpeed));
 	}
 }
-else{
-	camera_h = 512;
-}
-camera_set_view_pos(view_camera[0], 0, lerp(camera_get_view_y(view_camera[0]), min(camera_h - halfViewHeight, 512) , transitionSpeed));
 
 //if (ds_list_size(targetList)>=1 and targetList[|0] != noone){
 //	var newX = array_get( getCenter(targetList), 0);

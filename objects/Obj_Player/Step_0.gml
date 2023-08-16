@@ -49,13 +49,13 @@ x_vel *= 0.9;
 //add gravity to the y velocity
 y_vel += grav;
 
-if(isKnockedOut){
-	var ind = ds_list_find_index(Obj_GameManager.targetList, id);
-	ds_list_delete(Obj_GameManager.targetList, ind);
-}
-else if(!isKnockedOut and ds_list_find_index(Obj_GameManager.targetList, id) == -1){
-	ds_list_add(Obj_GameManager.targetList, id);
-}
+//if(isKnockedOut){
+//	var ind = ds_list_find_index(Obj_GameManager.targetList, id);
+//	ds_list_delete(Obj_GameManager.targetList, ind);
+//}
+//else if(!isKnockedOut and ds_list_find_index(Obj_GameManager.targetList, id) == -1){
+//	ds_list_add(Obj_GameManager.targetList, id);
+//}
 
 //if respawn_timer is greater than 0
 //AKA if respawn_timer is counting down
@@ -141,6 +141,8 @@ if(!isKnockedOut){
 					if(isDescending){
 						if(collide_with.isKnockedOut != true and !collide_with.isDescending)
 						{
+							y_vel = max(min(-10, -y_vel), -15);
+							r_y = 0;
 							show_debug_message("player");
 							isDescending = false;
 							colliding = true;
@@ -256,10 +258,10 @@ if (!isKnockedOut and !isDescending){
 		if (timeSinceLastKey <= dashThreshold){
 			dashDir = -1;
 			dash(id, dashDir);
-			show_debug_message("double dash");
+			//show_debug_message("double dash");
 		}
 		else{
-			show_debug_message("normal dash");
+			//show_debug_message("normal dash");
 		}
 		lastLkey = current_time;
 	}
@@ -270,20 +272,20 @@ if (!isKnockedOut and !isDescending){
 		if (timeSinceLastKey <= dashThreshold){
 			dashDir = 1;
 			dash(id, dashDir);
-			show_debug_message("double dash");
+			//show_debug_message("double dash");
 		}
 		else{
-			show_debug_message("normal dash");
+			//show_debug_message("normal dash");
 		}
 		lastRkey = current_time;
 	}
 	if(keyboard_check_released(descendKey)){
 		var timeSinceLastKey = current_time - lastDescKey;
-		show_debug_message(timeSinceLastKey);
+		//show_debug_message(timeSinceLastKey);
 		if (timeSinceLastKey <= descThreshold){
 			
 			descend(id);
-			show_debug_message("double dash");
+			//show_debug_message("double dash");
 		}
 		else{
 			

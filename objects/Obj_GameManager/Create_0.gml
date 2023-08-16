@@ -6,6 +6,11 @@ frames_between_cloud = 150;
 
 maxCloudCount = 40;
 
+cam = view_camera[0];
+transitionSpeed = 0.2;
+offsetWidth = 300;
+offsetHeight = 250;
+aspectRatio = 768/512;  //width over height
 
 
 

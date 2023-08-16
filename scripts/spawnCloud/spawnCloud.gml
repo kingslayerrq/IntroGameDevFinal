@@ -12,7 +12,7 @@ function spawnCloud(){
 	var newCloud = instance_create_layer(randomX, randomY, "Instances", Obj_Cloud);
 	with(newCloud){
 		var tries = 0;
-		while(tries< 3000 and  collision_rectangle(randomX - 160, randomY - 160, randomX + 160, randomY + 160, Obj_Solid, false, true) != noone){
+		while(tries< 3000 and  collision_rectangle(randomX - 160, randomY - 160, randomX + 160, randomY + 160, Obj_Solid, false, false) != noone){
 			x = random_range(0, room_width);
 			y = random_range(220, room_height - 220);
 			tries++;
